@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="arena-game" content="peri-golf">
-<title>Peri Golf</title>
-<meta name="description" content="Physics mini-golf among the fairy chimneys of Cappadocia, redesigned as a fantasy miniature diorama with a wooden signpost UI: 12 hand-designed holes. Plays in the browser.">
+<title>페리 골프 · 요정 굴뚝 골프</title>
+<meta name="description" content="카파도키아 요정 굴뚝 사이를 누비는 3D 물리 미니골프. 손으로 빚은 12개 홀, 브라우저에서 바로 플레이. (Furkiozknn/peri-golf 비공식 한글화)">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Peri Golf · Fairy Chimney Golf">
-<meta property="og:description" content="Physics mini-golf among the fairy chimneys of Cappadocia, redesigned as a fantasy miniature diorama with a wooden signpost UI: 12 hand-designed holes. Plays in the browser.">
-<meta property="og:url" content="https://furkiozknn.github.io/peri-golf/">
-<meta property="og:image" content="https://furkiozknn.github.io/peri-golf/docs/card.jpg">
+<meta property="og:title" content="페리 골프 · 요정 굴뚝 골프 (한글화)">
+<meta property="og:description" content="카파도키아 요정 굴뚝 사이를 누비는 3D 물리 미니골프. 손으로 빚은 12개 홀, 브라우저에서 바로 플레이. (Furkiozknn/peri-golf 비공식 한글화)">
+<meta property="og:url" content="https://sigco3111.github.io/peri-golf-ko/">
+<meta property="og:image" content="https://sigco3111.github.io/peri-golf-ko/docs/card.jpg">
 <meta property="og:image:width" content="960">
 <meta property="og:image:height" content="540">
 <meta name="twitter:card" content="summary_large_image">
@@ -102,7 +102,7 @@ html, body {
   overflow: hidden;
   background: var(--bg);
   color: var(--ink);
-  font-family: 'Fredoka', 'Plus Jakarta Sans', "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family: 'Fredoka', 'Pretendard', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Plus Jakarta Sans', "Segoe UI", system-ui, -apple-system, sans-serif;
   -webkit-tap-highlight-color: transparent;
   touch-action: none;
   user-select: none;
@@ -1127,6 +1127,12 @@ table.card .ace { color: var(--gold); font-weight: 800; }
   .hud-telemetry, .topbar .acts { animation: none; }
   .rec { animation: none; }
 }
+
+/* Korean (Hangul) adjustments */
+html[lang="ko"] *, html[lang="ko"] *::before, html[lang="ko"] *::after { text-transform: none !important; letter-spacing: normal !important; }
+html[lang="ko"] body { word-break: keep-all; overflow-wrap: break-word; line-height: 1.4; }
+html[lang="ko"] .btn, html[lang="ko"] .seg button { white-space: normal; line-height: 1.25; }
+html[lang="ko"] .seg button { padding-left: 10px; padding-right: 10px; }
 </style>
 <script>/*ARENA-KIT:BEGIN v1.1.0 sha256:3bea83137e26*/
 /* ARENA-KIT v1 — shared layer for the 21 Claude Game Arena games.
@@ -1247,6 +1253,10 @@ table.card .ace { color: var(--gold); font-weight: 800; }
 
   /* ---------- language ---------- */
   var STR = {
+    ko: { again: '다시 하기', another: '다른 게임 해보기', close: '닫기', settings: '접근성',
+      textSize: '글자 크기', contrast: '고대비', motion: '움직임 줄이기', vibration: '진동',
+      autoPause: '탭을 벗어나면 일시정지', copied: '클립보드에 복사했어요', streak: '연속', days: '일', share: '공유',
+      fbAsk: '재미있었나요?', like: '좋아요', dislike: '별로예요', thanks: '고마워요!' },
     tr: { again: 'Bir daha', another: 'Başka bir oyun dene', close: 'Kapat', settings: 'Erişilebilirlik',
       textSize: 'Yazı boyutu', contrast: 'Yüksek karşıtlık', motion: 'Hareketi azalt', vibration: 'Titreşim',
       autoPause: 'Sekme değişince duraklat', copied: 'Panoya kopyalandı', streak: 'Seri', days: 'gün', share: 'Paylaş',
@@ -1256,8 +1266,8 @@ table.card .ace { color: var(--gold); font-weight: 800; }
       autoPause: 'Pause when the tab is hidden', copied: 'Copied to clipboard', streak: 'Streak', days: 'days', share: 'Share',
       fbAsk: 'Did you enjoy it?', like: 'I liked it', dislike: 'I did not like it', thanks: 'Thanks!' },
   };
-  var lang = 'en';
-  try { lang = /^tr/i.test((hasDOM && document.documentElement.lang) || (root.navigator && navigator.language) || '') ? 'tr' : 'en'; } catch (e) {}
+  var lang = 'ko';
+  try { var dl = ((hasDOM && document.documentElement.lang) || '').slice(0, 2).toLowerCase(); if (STR[dl]) lang = dl; } catch (e) {}
   function t(k) { return (STR[lang] && STR[lang][k]) || STR.en[k] || k; }
 
   /* ---------- game id + passport ---------- */
@@ -1314,12 +1324,12 @@ table.card .ace { color: var(--gold); font-weight: 800; }
   var CSS = '' +
     '.arena-toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:2147483000;' +
     'max-width:min(92vw,520px);padding:10px 14px;border-radius:10px;background:rgba(14,13,11,.88);color:#f6f1e6;' +
-    'font:500 calc(14px*var(--arena-text-scale,1))/1.35 system-ui,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.35);pointer-events:none;' +
+    'font:500 calc(14px*var(--arena-text-scale,1))/1.35 system-ui,\'Pretendard\',\'Noto Sans KR\',\'Apple SD Gothic Neo\',\'Malgun Gothic\',sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.35);pointer-events:none;' +
     'opacity:0;transition:opacity .25s}' +
     '.arena-toast.on{opacity:1}' +
     '.arena-modal{position:fixed;inset:0;z-index:2147483001;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45)}' +
     '.arena-card{width:min(92vw,420px);padding:20px;border-radius:14px;background:#f6f1e6;color:#1a1712;' +
-    'font:500 calc(15px*var(--arena-text-scale,1))/1.45 system-ui,sans-serif;box-shadow:0 18px 50px rgba(0,0,0,.4)}' +
+    'font:500 calc(15px*var(--arena-text-scale,1))/1.45 system-ui,\'Pretendard\',\'Noto Sans KR\',\'Apple SD Gothic Neo\',\'Malgun Gothic\',sans-serif;box-shadow:0 18px 50px rgba(0,0,0,.4)}' +
     '.arena-card h2{margin:0 0 6px;font-size:1.3em}.arena-card p{margin:4px 0}' +
     '.arena-card button,.arena-card a.arena-btn{display:block;width:100%;margin-top:10px;padding:11px;border:0;border-radius:10px;' +
     'font:inherit;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;box-sizing:border-box}' +
@@ -1332,7 +1342,7 @@ table.card .ace { color: var(--gold); font-weight: 800; }
     'html[data-arena-contrast] body{filter:contrast(1.25) saturate(1.1)}' +
     '.arena-fb{position:fixed;left:50%;top:calc(10px + env(safe-area-inset-top));transform:translateX(-50%);z-index:2147483000;white-space:nowrap;' +
     'display:flex;align-items:center;gap:8px;padding:6px 6px 6px 14px;border-radius:999px;background:rgba(14,13,11,.9);color:#f6f1e6;' +
-    'font:600 calc(15px*var(--arena-text-scale,1))/1.2 system-ui,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.35)}' +
+    'font:600 calc(15px*var(--arena-text-scale,1))/1.2 system-ui,\'Pretendard\',\'Noto Sans KR\',\'Apple SD Gothic Neo\',\'Malgun Gothic\',sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.35)}' +
     '.arena-fb button{min-width:44px;min-height:44px;border:0;border-radius:50%;background:#2b2722;color:#f6f1e6;font:22px/1 system-ui;cursor:pointer}' +
     '.arena-fb button.arena-fb-x{font-size:16px;background:transparent}' +
     '.arena-fb.arena-fb-inline{position:static;transform:none;margin:12px auto 0;width:max-content;max-width:100%;box-shadow:none}' +
@@ -1494,10 +1504,10 @@ table.card .ace { color: var(--gold); font-weight: 800; }
     var g = c.getContext('2d'); if (!g) return Promise.resolve(null);
     g.fillStyle = o.bg || '#1a1712'; g.fillRect(0, 0, 1080, 1350);
     g.fillStyle = o.accent || '#e2552f'; g.fillRect(0, 0, 1080, 18);
-    g.fillStyle = '#f6f1e6'; g.font = '700 84px system-ui,sans-serif'; g.fillText(o.title || gameId, 72, 220);
-    g.font = '500 52px system-ui,sans-serif';
+    g.fillStyle = '#f6f1e6'; g.font = '700 84px system-ui,"Pretendard","Noto Sans KR","Malgun Gothic",sans-serif'; g.fillText(o.title || gameId, 72, 220);
+    g.font = '500 52px system-ui,"Pretendard","Noto Sans KR","Malgun Gothic",sans-serif';
     (o.lines || []).forEach(function (l, i) { g.fillText(String(l), 72, 340 + i * 78); });
-    g.font = '500 36px system-ui,sans-serif'; g.fillStyle = '#c9bda4'; g.fillText(o.url || ('furkiozknn.github.io/' + gameId), 72, 1270);
+    g.font = '500 36px system-ui,"Pretendard","Noto Sans KR","Malgun Gothic",sans-serif'; g.fillStyle = '#c9bda4'; g.fillText(o.url || ('furkiozknn.github.io/' + gameId), 72, 1270);
     return new Promise(function (res) { c.toBlob ? c.toBlob(function (b) { res(b); }, 'image/png') : res(null); });
   }
 
@@ -1566,7 +1576,7 @@ table.card .ace { color: var(--gold); font-weight: 800; }
   }
 
   root.Arena = {
-    version: VERSION, quiet: quiet, game: gameId, games: GAMES.slice(), lang: function (l) { if (l) lang = l === 'tr' ? 'tr' : 'en'; return lang; },
+    version: VERSION, quiet: quiet, game: gameId, games: GAMES.slice(), lang: function (l) { if (l) lang = STR[l] ? l : 'ko'; return lang; },
     perf: perf, hint: hint, toast: toast, endCard: endCard, daily: daily, share: share, shareCard: shareCard,
     profile: profile, award: award, settings: settings, openSettings: openSettings, mountSettingsButton: mountSettingsButton,
     track: track, complete: complete,
@@ -1578,7 +1588,6 @@ table.card .ace { color: var(--gold); font-weight: 800; }
 <script type="importmap">
 {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"},"integrity":{"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js":"sha384-GY5FqjttLCFRt/McQbyaVdCk2O1IQtOeX8Py6NfD89BIAsIyJFRl4UgSXrk2vXAk","https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/GLTFLoader.js":"sha384-Lq1Wl94so5JCKGDvezrdVMJhdeKQkwb8iwRo59QrPPd61CnrCJZLxYmFlQ8ZuOKR","https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/RGBELoader.js":"sha384-df8Ij6+muzecLENB3U9Z40GSfTjNV/TbniF7LQdZiYn4nHS5Javsoo5xFTWG0EJE","https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/utils/BufferGeometryUtils.js":"sha384-wOjwauvHlJO7K6APr7FmMGH2nupQa3Ndzas9bJZhsAMOK055efJud8ns4aYmASKv"}}
 </script>
-<script data-goatcounter="https://furkiozknn.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
 <canvas id="c" tabindex="0" aria-label="Peri Golf"></canvas>
@@ -1671,7 +1680,7 @@ table.card .ace { color: var(--gold); font-weight: 800; }
       <button class="ibtn" id="b-view" data-tt="overview" aria-label="Overview"><svg><use href="#i-eye"/></svg></button>
       <button class="ibtn" id="b-card" data-tt="scorecard" aria-label="Scorecard"><svg><use href="#i-card"/></svg></button>
       <button class="ibtn" id="b-sound" data-tt="sound" aria-label="Sound"><svg><use href="#i-sound"/></svg></button>
-      <button class="ibtn" id="b-lang" data-tt="language" aria-label="Language">EN</button>
+      <button class="ibtn" id="b-lang" data-tt="language" aria-label="Language">KO</button>
       <button class="ibtn" id="b-pause" data-tt="pause" aria-label="Pause"><svg><use href="#i-pause"/></svg></button>
     </div>
   </header>
@@ -1682,7 +1691,7 @@ table.card .ace { color: var(--gold); font-weight: 800; }
   
   <!-- Hole Intro Banner: Unobtrusive, elegant, and unambiguous -->
   <div class="intro" id="intro" hidden>
-    <span class="intro-badge">Kapadokya Parkuru</span>
+    <span class="intro-badge">카파도키아 코스</span>
     <h2 id="intro-name"></h2>
     <p id="intro-par"></p>
     <small id="intro-skip"></small>
@@ -1704,7 +1713,7 @@ table.card .ace { color: var(--gold); font-weight: 800; }
         <button class="btn w sky" id="b-daily" disabled><svg><use href="#i-target"/></svg><span data-t="daily"></span> <span id="daily-info" style="font-weight:600;opacity:.8"></span></button>
         <div class="row" style="justify-content:center">
           <button class="btn sky" id="b-settings"><svg><use href="#i-gear"/></svg><span data-t="settings"></span></button>
-          <div class="seg" id="seg-lang"><button data-l="tr">TR</button><button data-l="en">EN</button></div>
+          <div class="seg" id="seg-lang"><button data-l="ko">한국어</button><button data-l="en">EN</button><button data-l="tr">TR</button></div>
         </div>
       </div>
       <div class="best" id="best-line"></div>
@@ -1713,6 +1722,7 @@ table.card .ace { color: var(--gold); font-weight: 800; }
       <div class="sc-line" id="sc-line"></div>
       <div class="gallery" id="ace-gallery"></div>
       <div class="footer"><a href="https://github.com/Furkiozknn" target="_blank" rel="noopener">Claude Game Arena</a> · built by Claude Fable 5.1</div>
+      <div class="footer"><a href="https://github.com/sigco3111/peri-golf-ko" target="_blank" rel="noopener" data-t="koCredit">한글화: sigco3111 (비공식) · 원작 Furkiozknn/peri-golf (MIT)</a></div>
     </div>
   </div>
 
@@ -1734,7 +1744,7 @@ table.card .ace { color: var(--gold); font-weight: 800; }
       <label class="sl"><span data-t="master"></span><input type="range" id="r-master" min="0" max="1" step="0.01" data-t-aria="master"></label>
       <label class="sl"><span data-t="music"></span><input type="range" id="r-music" min="0" max="1" step="0.01" data-t-aria="music"></label>
       <label class="sl"><span data-t="effects"></span><input type="range" id="r-sfx" min="0" max="1" step="0.01" data-t-aria="effects"></label>
-      <div class="row"><span style="width:110px;font-size:14px;font-weight:700;color:var(--ink)" data-t="language"></span><div class="seg" id="seg-lang2"><button data-l="tr">TR</button><button data-l="en">EN</button></div></div>
+      <div class="row"><span style="width:110px;font-size:14px;font-weight:700;color:var(--ink)" data-t="language"></span><div class="seg" id="seg-lang2"><button data-l="ko">한국어</button><button data-l="en">EN</button><button data-l="tr">TR</button></div></div>
       <div class="row"><span style="width:110px;font-size:14px;font-weight:700;color:var(--ink)" data-t="quality"></span><div class="seg" id="seg-q"><button data-q="low" data-t="low"></button><button data-q="high" data-t="high"></button></div></div>
       <button class="btn w sky" id="b-full"><svg><use href="#i-full"/></svg><span data-t="fullscreen"></span></button>
       <button class="btn primary w" id="b-sclose"><svg><use href="#i-back"/></svg><span data-t="back"></span></button>
@@ -1792,9 +1802,10 @@ table.card .ace { color: var(--gold); font-weight: 800; }
 window.__errs = [];
 window.addEventListener('error', e => { window.__errs.push(String(e.message || e)); });
 window.addEventListener('unhandledrejection', e => { window.__errs.push('Promise: ' + String(e.reason && e.reason.message || e.reason)); });
-const __tr = (navigator.language || '').toLowerCase().startsWith('tr');
-document.getElementById('loadmsg').textContent = __tr ? 'Yükleniyor… 0/1' : 'Loading… 0/1';
-setTimeout(() => { if (!window.__loaded) document.getElementById('loadmsg').textContent = __tr ? 'Three.js yüklenemedi; internet bağlantısını kontrol et.' : 'Three.js could not load; check your connection.'; }, 20000);
+let __l = 'ko'; try { const v = JSON.parse(localStorage.getItem('arena.periGolf.settings') || 'null'); if (v && (v.lang === 'en' || v.lang === 'tr')) __l = v.lang; const q = new URLSearchParams(location.search).get('lang'); if (q === 'en' || q === 'tr' || q === 'ko') __l = q; } catch (e) {}
+const __M = { ko: ['불러오는 중… 0/1', 'Three.js를 불러오지 못했어요. 인터넷 연결을 확인해 주세요.'], tr: ['Yükleniyor… 0/1', 'Three.js yüklenemedi; internet bağlantısını kontrol et.'], en: ['Loading… 0/1', 'Three.js could not load; check your connection.'] }[__l];
+document.getElementById('loadmsg').textContent = __M[0];
+setTimeout(() => { if (!window.__loaded) document.getElementById('loadmsg').textContent = __M[1]; }, 20000);
 </script>
 
 <script type="module">
@@ -1818,6 +1829,35 @@ window.periGolfAssets = ASSETS;
 // i18n
 // ---------------------------------------------------------------------------
 const I18N = {
+  ko: {
+    subtitle: '카파도키아 요정 굴뚝 사이를 누비는 3D 물리 미니골프',
+    howto: '공을 눌러 뒤로 끌어당긴 뒤 놓으면 샷! 빈 땅을 끌면 카메라가 돌아가요 · [V] 조감 시점 · [C] 스코어카드',
+    play: '플레이', continue: '이어하기', settings: '설정', hole: '홀', par: '파', strokes: '타수', total: '합계',
+    paused: '일시정지', resume: '계속하기', restartHole: '홀 다시 시작', mainMenu: '메인 메뉴',
+    master: '전체 볼륨', music: '음악', effects: '효과음', language: '언어', quality: '화질', low: '낮음', high: '높음',
+    fullscreen: '전체 화면', back: '뒤로', scorecard: '스코어카드', endTitle: '코스 완주!', vsPar: '파 대비', starsLbl: '별',
+    bestLbl: '최고 기록', playAgain: '다시 하기', pickHole: '코스 홀 (열린 홀만 플레이할 수 있어요):', bestNone: '아직 완주한 라운드가 없어요',
+    bestCard: '최고 기록: {t}타 ({r}) · 별 {s}/36', contFrom: '({n}번 홀)', overview: '조감 시점', pause: '일시정지', sound: '소리',
+    hintAim: '공을 눌러 뒤로 끌어당긴 뒤 놓으면 샷!', hintCam: '빈 땅을 끌어 카메라 회전 · V로 조감 시점',
+    skip: '화면을 눌러 코스 소개 건너뛰기', nextHole: '다음 홀', finish: '결과 보기', water: '물에 빠졌어요: +1타', oob: '코스 밖으로 나갔어요: +1타',
+    grape: '숨은 포도를 찾았어요!', locked: '잠김', loading: '불러오는 중…', loadFail: 'Three.js를 불러오지 못했어요. 인터넷 연결을 확인해 주세요.',
+    ace: '홀인원!', eagle: '이글!', birdie: '버디!', parR: '파', bogey: '보기', dbogey: '더블 보기', over: '+{n}',
+    star_under: '파 이하로 마무리', star_grape: '숨겨진 카파도키아 포도', newRecord: '★ 코스 신기록! ★', musicOn: '음악 켜짐', musicOff: '음악 꺼짐',
+    sfxOn: '효과음 켜짐', sfxOff: '효과음 꺼짐', strokesOf: '{s}타 · 파 {p}', cardSaved: '스코어카드 저장됨', holeBest: '홀 최고 기록!',
+    cupName: '홀', result: '결과', trickLbl: '특별 도전', ghostLbl: '고스트 라인: 나의 최고 샷',
+    scFound: '숨은 지름길 발견: {k}!', scUsed: '지름길: {k}', scCount: '발견한 숨은 지름길: {n}/{m}', scTaken: '지름길',
+    scKind: { ring: '요정의 고리', tunnel: '비밀 터널', portal: '요정의 문' },
+    aceGallery: '홀인원 갤러리', aceNone: '아직 홀인원이 없어요', aceItem: '{h}번 홀 · {d} · {s}타', aceNew: '갤러리에 추가됐어요!',
+    trick: { ace: '한 번에 홀인', banks: '벽에 튕겨서 홀인', banks2: '벽 두 번 튕겨서 홀인', long: '{d}m 거리에서 홀인',
+      ride: '도자기 물레를 타고 홀인', noSand: '모래를 한 번도 밟지 않고 마무리', clean: '벌타 없이 마무리', air: '공중에 {t}초 동안 떠 있기', tunnel: '터널을 통과해서 홀인' },
+    daily: '오늘의 도전', dailyInfo: '(연속 {s}일 · 최고 {b})', dailyDone: '(오늘 완료 · 연속 {s}일)',
+    dailyRes: '오늘의 도전 {d}: 연속 {s}일 · 최고 {b}', share: '공유', another: '다른 게임',
+    shareHole: '{n}번 홀 · {name}: {s}타 (파 {p}) {st}', shareDaily: '오늘의 도전 {d} · 연속 {k}일',
+    shareEnd: '{h}개 홀: {t}타 ({r}) · 별 {s}개', awAce: '홀인원', awCourse: '12개 홀 완주', awUnder: '파 이하 라운드',
+    introBadge: '카파도키아 코스', pageTitle: '페리 골프 · 요정 굴뚝 골프', koCredit: '한글화: sigco3111 (비공식) · 원작 Furkiozknn/peri-golf (MIT)',
+    holes: ['비둘기집 테라스', '요정 굴뚝 굽이', '동굴집', '도자기 공방', '모래 계곡', '지하 도시', '등불 통로',
+      '포도밭 길', '돌다리', '도약', '비둘기 계곡', '일출 능선'],
+  },
   tr: {
     subtitle: 'Kapadokya peribacaları arasında minyatür diorama golfü',
     howto: 'Topa basıp geriye sürükle, bırakınca vur. Boş alana sürükleyince kamera döner · [V] Kuş bakışı · [C] Skor kartı',
@@ -1843,6 +1883,7 @@ const I18N = {
     dailyRes: 'Günün Meydan Okuması {d}: seri {s} gün · en iyi {b}', share: 'Paylaş', another: 'Başka oyun',
     shareHole: '{n}. delik · {name}: {s} vuruş (Par {p}) {st}', shareDaily: 'Günün Meydan Okuması {d} · seri {k}',
     shareEnd: '{h} delik: {t} vuruş ({r}) · {s} yıldız', awAce: 'Tek vuruş', awCourse: '12 delik tamam', awUnder: 'Par altı tur',
+    introBadge: 'Kapadokya Parkuru', pageTitle: 'Peri Golf · Peribacası Golfü', koCredit: 'Korece uyarlama: sigco3111 (resmi değil) · orijinal Furkiozknn/peri-golf (MIT)',
     holes: ['Güvercinlik Terası', 'Peribacası Dönemeci', 'Kaya Ev', 'Çömlek Atölyesi', 'Kum Vadisi', 'Yeraltı Şehri', 'Fener Geçidi',
       'Bağ Yolu', 'Taş Köprü', 'Sıçrama', 'Güvercin Vadisi', 'Gün Doğumu Sırtı'],
   },
@@ -1871,11 +1912,12 @@ const I18N = {
     dailyRes: 'Daily challenge {d}: streak {s} · best {b}', share: 'Share', another: 'Another game',
     shareHole: 'Hole {n} · {name}: {s} strokes (par {p}) {st}', shareDaily: 'Daily challenge {d} · streak {k}',
     shareEnd: '{h} holes: {t} strokes ({r}) · {s} stars', awAce: 'Hole in one', awCourse: 'All 12 holes', awUnder: 'Round under par',
+    introBadge: 'Cappadocia Course', pageTitle: 'Peri Golf · Fairy Chimney Golf', koCredit: 'Korean localization: sigco3111 (unofficial) · original Furkiozknn/peri-golf (MIT)',
     holes: ['Pigeon Terrace', 'Chimney Bend', 'Cave House', 'Pottery Workshop', 'Sand Valley', 'Underground City', 'Lantern Passage',
       'Vineyard Road', 'Stone Bridge', 'The Leap', 'Pigeon Valley', 'Sunrise Ridge'],
   },
 };
-let LANG = 'tr';
+let LANG = 'ko';
 const t = (k, vars) => {
   let s = (I18N[LANG][k] ?? I18N.en[k] ?? k);
   if (vars) for (const v in vars) s = s.replace('{' + v + '}', vars[v]);
@@ -1894,10 +1936,13 @@ const store = {
 const isPhone = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && Math.min(innerWidth, innerHeight) < 700);
 const settings = Object.assign({
   master: 0.8, music: 0.6, sfx: 0.8,
-  lang: (navigator.language || 'en').toLowerCase().startsWith('tr') ? 'tr' : 'en',
+  lang: 'ko',
   quality: isPhone ? 'low' : 'high',
 }, store.get(KEY.settings) || {});
-if (FLAG.lang === 'en' || FLAG.lang === 'tr') settings.lang = FLAG.lang;
+if (FLAG.lang === 'ko' || FLAG.lang === 'en' || FLAG.lang === 'tr') settings.lang = FLAG.lang;
+if (!I18N[settings.lang]) settings.lang = 'ko';
+const LANGS = ['ko', 'en', 'tr'];
+const nextLang = () => LANGS[(LANGS.indexOf(LANG) + 1) % LANGS.length];
 if (FLAG.low) settings.quality = 'low';
 LANG = settings.lang;
 const saveSettings = () => store.set(KEY.settings, settings);
@@ -3069,7 +3114,7 @@ function finishCourse() {
   if (full) { arenaAward('course', 'awCourse'); if (total < TOTAL_PAR) arenaAward('under', 'awUnder'); }
   ui.showEnd(total, starsN, record);
   view.onEnd && view.onEnd();
-  if (window.Arena && Arena.complete) Arena.complete({ mount: document.querySelector('#ov-end .panel') });   // arena-kit v1.1: peri-golf/complete + one-tap 👍/👎 (nothing on ?auto)
+  if (window.Arena && Arena.complete) Arena.complete({ mount: document.querySelector('#ov-end .panel'), feedback: false });   // arena-kit v1.1: peri-golf/complete + one-tap 👍/👎 (nothing on ?auto)
 }
 // stars/grape pickup and per-stroke tracking
 function trackBall(ev) {
@@ -3162,7 +3207,7 @@ window.periGolfSim = simulate;
 // The day's rng (Arena.daily().rng) picks one of the 12 holes (locks do not apply) and its wind; the hole is
 // played like any other, but nothing is written to the run save or the best card. Score = stars (0-3).
 // ---------------------------------------------------------------------------
-const ARENA_URL = 'https://furkiozknn.github.io/peri-golf/';
+const ARENA_URL = 'https://sigco3111.github.io/peri-golf-ko/';
 const dayText = d => String(d).replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3');
 function dailyInfo() {
   if (!window.Arena) return null;
@@ -3701,7 +3746,7 @@ window.addEventListener('keydown', (e) => {
   if (k === 'p' || k === 'P' || k === 'Escape') { e.preventDefault(); ui.escape(); return; }
   if (k === 'm' || k === 'M') { ui.toggleMusic(); return; }
   if (k === 'x' || k === 'X') { ui.toggleSfx(); return; }
-  if (k === 'l' || k === 'L') { ui.setLang(LANG === 'tr' ? 'en' : 'tr'); return; }
+  if (k === 'l' || k === 'L') { ui.setLang(nextLang()); return; }
   if (k === 'v' || k === 'V') { if (game.phase === 'play') ui.toggleTop(); return; }
   if (k === 'c' || k === 'C') { if (game.phase === 'play' && !game.paused) ui.showCard(true); return; }
   if (game.phase === 'intro' && (k === ' ' || k === 'Enter')) { game.introT = game.introDur; e.preventDefault(); return; }
@@ -3722,7 +3767,6 @@ window.addEventListener('resize', () => { renderer.setSize(innerWidth, innerHeig
 // ---------------------------------------------------------------------------
 const $ = (id) => document.getElementById(id);
 const starSvg = (on) => `<svg class="${on ? 'on' : ''}" viewBox="0 0 24 24"><use href="#i-star"/></svg>`;
-const INTRO_BADGE = $('intro').querySelector('.intro-badge').textContent;
 const ui = {
   prevOverlay: null,
   applyLang() {
@@ -3731,6 +3775,7 @@ const ui = {
     document.querySelectorAll('[data-tt]').forEach(el => { el.title = t(el.dataset.tt); el.setAttribute('aria-label', t(el.dataset.tt)); });
     document.querySelectorAll('[data-t-aria]').forEach(el => { el.setAttribute('aria-label', t(el.dataset.tAria)); });
     $('b-lang').textContent = LANG.toUpperCase();
+    document.title = t('pageTitle');
     document.querySelectorAll('#seg-lang button, #seg-lang2 button').forEach(b => b.classList.toggle('on', b.dataset.l === LANG));
     document.querySelectorAll('#seg-q button').forEach(b => b.classList.toggle('on', b.dataset.q === settings.quality));
     $('intro-skip').textContent = t('skip');
@@ -3761,7 +3806,7 @@ const ui = {
   hint(msg) { const h = $('hint'); if (!msg) { h.hidden = true; return; } h.textContent = msg; h.hidden = false; },
   introCard(show) {
     const el = $('intro'); if (!show) { el.hidden = true; return; }
-    $('intro').querySelector('.intro-badge').textContent = game.daily ? t('daily') : INTRO_BADGE;
+    $('intro').querySelector('.intro-badge').textContent = game.daily ? t('daily') : t('introBadge');
     const i = game.holeIndex; $('intro-name').textContent = (i + 1) + '. ' + t('holes')[i]; $('intro-par').textContent = t('par') + ' ' + HOLES[i].par + ' · ' + t('trickLbl') + ': ' + trickText(HOLES[i]); el.hidden = false;
   },
   power(p, show) { $('power').hidden = !show; $('powerfill').style.height = Math.round(p * 100) + '%'; },
@@ -3779,7 +3824,7 @@ const ui = {
       const b = document.createElement('button'); const unlocked = i < best.unlocked || FLAG.debug;
       b.className = unlocked ? (best.holeBest[i] !== undefined ? 'done' : '') : 'locked'; b.disabled = !unlocked;
       const hs = (best.holeStars && best.holeStars[i]) || [false, false, false];
-      b.innerHTML = `<span class="hole-idx">${i + 1}</span><span class="hole-par">Par ${HOLES[i].par}</span><span class="stars">${hs.map(starSvg).join('')}</span>` + (found[i] ? '<span class="sc-mark" aria-hidden="true">✦</span>' : '');
+      b.innerHTML = `<span class="hole-idx">${i + 1}</span><span class="hole-par">${t('par')} ${HOLES[i].par}</span><span class="stars">${hs.map(starSvg).join('')}</span>` + (found[i] ? '<span class="sc-mark" aria-hidden="true">✦</span>' : '');
       b.title = unlocked ? t('holes')[i] + ' · ' + t('par') + ' ' + HOLES[i].par : t('locked'); b.setAttribute('aria-label', b.title);
       b.addEventListener('click', () => { audio.init(); audio.ui(); startRun(i); });
       grid.appendChild(b);
@@ -3876,7 +3921,7 @@ $('b-cclose').addEventListener('click', () => { audio.ui(true); ui.showCard(fals
 $('b-card').addEventListener('click', () => { audio.init(); ui.showCard(true); });
 $('b-view').addEventListener('click', () => { audio.init(); ui.toggleTop(); });
 $('b-sound').addEventListener('click', () => { audio.init(); const on = audio.musicOn || audio.sfxOn; audio.musicOn = audio.sfxOn = !on; audio.applyVolumes(); ui.soundBtn(); ui.toast(t(on ? 'sfxOff' : 'sfxOn')); });
-$('b-lang').addEventListener('click', () => ui.setLang(LANG === 'tr' ? 'en' : 'tr'));
+$('b-lang').addEventListener('click', () => ui.setLang(nextLang()));
 document.querySelectorAll('#seg-lang button, #seg-lang2 button').forEach(b => b.addEventListener('click', () => ui.setLang(b.dataset.l)));
 document.querySelectorAll('#seg-q button').forEach(b => b.addEventListener('click', () => { settings.quality = b.dataset.q; saveSettings(); applyQuality(); ui.applyLang(); }));
 for (const [id, key] of [['r-master', 'master'], ['r-music', 'music'], ['r-sfx', 'sfx']]) $(id).addEventListener('input', (e) => { settings[key] = parseFloat(e.target.value); audio.init(); audio.applyVolumes(); saveSettings(); });
